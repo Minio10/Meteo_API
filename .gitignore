@@ -1,3 +1,7 @@
+# Created by https://www.toptal.com/developers/gitignore/api/rails,react
+# Edit at https://www.toptal.com/developers/gitignore?templates=rails,react
+
+### Rails ###
 *.rbc
 capybara-*.html
 .rspec
@@ -67,3 +71,21 @@ yarn-debug.log*
 /storage/*
 !/storage/.keep
 /public/uploads
+
+### react ###
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+
+node_modules
+bower_components
+
+*.sublime*
+
+psd
+thumb
+sketch
+
+# End of https://www.toptal.com/developers/gitignore/api/rails,react
