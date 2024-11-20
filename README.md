@@ -43,13 +43,6 @@ Below are the steps to set up and run the project locally.
    ```bash
    bundle install
    ```
-
-3. **Start the Rails Server:**
-   ```bash
-   rails server
-   ```
-   The API will be available at `http://localhost:3000`.
-
 ---
 
 ### Frontend Setup
@@ -63,13 +56,6 @@ Below are the steps to set up and run the project locally.
    ```bash
    npm install
    ```
-
-3. **Start the React Development Server:**
-   ```bash
-   npm start
-   ```
-   The React app will be available at `http://localhost:3011`.
-
 ---
 
 ## Running the Applications
