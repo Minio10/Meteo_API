@@ -13,9 +13,9 @@ gem 'sqlite3', '~> 1.4'
 
 gem 'rack-cors'
 
+gem 'foreman'
 gem 'geocoder'
 gem 'rubocop'
-gem 'foreman'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'

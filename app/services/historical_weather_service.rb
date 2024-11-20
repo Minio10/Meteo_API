@@ -59,14 +59,14 @@ class HistoricalWeatherService
     response = Net::HTTP.get_response(uri)
     return nil unless response.is_a?(Net::HTTPSuccess)
 
-    JSON.parse(response.body)['daily']    
+    JSON.parse(response.body)['daily']
   end
 
   def create_missing_weather_dates
     @missing_dates.each do |date|
       weather_data = fetch_weather_data_from_api(date)
       create_weather_data(weather_data) if weather_data
-    end    
+    end
   end
 
   def create_weather_data(weather_data)
