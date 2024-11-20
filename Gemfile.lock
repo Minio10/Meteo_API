@@ -79,6 +79,7 @@ GEM
       irb (~> 1.10)
       reline (>= 0.3.8)
     erubi (1.13.0)
+    foreman (0.88.1)
     geocoder (1.8.3)
       base64 (>= 0.1.0)
       csv (>= 3.0.0)
@@ -197,6 +198,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   debug
+  foreman
   geocoder
   puma (~> 5.0)
   rack-cors

@@ -60,24 +60,19 @@ This is a full-stack application with a **Ruby on Rails** backend (API) and a **
    ```bash
    npm start
    ```
-   The React app will be available at `http://localhost:3001`.
+   The React app will be available at `http://localhost:3011`.
 
 ---
 
 ## Running the Applications
 
-1. Start the **Rails backend**:
-   ```bash
-   cd backend
-   rails server
-   ```
+To start both the Rails backend and the React frontend concurrently, use **Foreman**:
 
-2. Start the **React frontend**:
-   ```bash
-   cd frontend
-   npm start
-   ```
-
+```bash
+gem install foreman
+foreman start
+```
+---
 ## Additional Notes
 
 - The backend uses Rails 7 API mode, so there’s no built-in view layer.
