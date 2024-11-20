@@ -47,18 +47,18 @@ const App = () => {
 
   // Prepare data for chart and table
   const chartDataTemperature = weatherData && {
-    labels: weatherData.map(item => item.date), // Dates as x-axis
+    labels: weatherData.map(item => item.date),
     datasets: [
       {
         label: 'High Temperature (°C)',
-        data: weatherData.map(item => item.temperature_high), // High temperatures
+        data: weatherData.map(item => item.temperature_high),
         borderColor: 'rgba(255, 99, 132, 1)',
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         fill: true,
       },
       {
         label: 'Low Temperature (°C)',
-        data: weatherData.map(item => item.temperature_low), // Low temperatures
+        data: weatherData.map(item => item.temperature_low),
         borderColor: 'rgba(54, 162, 235, 1)',
         backgroundColor: 'rgba(54, 162, 235, 0.2)',
         fill: true,
@@ -67,11 +67,11 @@ const App = () => {
   };
 
   const chartDataPrecipitation = weatherData && {
-    labels: weatherData.map(item => item.date), // Dates as x-axis
+    labels: weatherData.map(item => item.date),
     datasets: [
       {
         label: 'Precipitation (mm)',
-        data: weatherData.map(item => item.precipitation), // Precipitation
+        data: weatherData.map(item => item.precipitation),
         borderColor: 'rgba(75, 192, 192, 1)',
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         fill: false,
@@ -80,106 +80,113 @@ const App = () => {
   };
 
   return (
-    <Container className="my-5">
-      <Card className="p-4 shadow-sm">
-        <h2 className="mb-4">Weather Data</h2>
+    <Container className="my-5" style={{ maxWidth: '800px' }}>
+      <Card className="shadow-lg">
+        <Card.Header className="bg-primary text-white text-center">
+          <h2>Weather Data Application</h2>
+        </Card.Header>
+        <Card.Body className="p-4">
+          <Form onSubmit={handleSubmit}>
+            <Row className="mb-3">
+              <Col md={12}>
+                <Form.Group controlId="location">
+                  <Form.Label className="fw-bold">Location</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter location"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    className="rounded-pill"
+                    required
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
 
-        <Form onSubmit={handleSubmit}>
-          <Row className="mb-3">
-            <Col md={12}>
-              <Form.Group controlId="location">
-                <Form.Label>Location</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter location"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  required
-                />
-              </Form.Group>
-            </Col>
-          </Row>
+            <Row className="mb-3">
+              <Col md={6}>
+                <Form.Group controlId="start_date">
+                  <Form.Label className="fw-bold">Start Date</Form.Label>
+                  <Form.Control
+                    type="date"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                    className="rounded-pill"
+                    required
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group controlId="end_date">
+                  <Form.Label className="fw-bold">End Date</Form.Label>
+                  <Form.Control
+                    type="date"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                    className="rounded-pill"
+                    required
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
 
-          <Row className="mb-3">
-            <Col md={6}>
-              <Form.Group controlId="start_date">
-                <Form.Label>Start Date</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
-                  required
-                />
-              </Form.Group>
-            </Col>
-            <Col md={6}>
-              <Form.Group controlId="end_date">
-                <Form.Label>End Date</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={endDate}
-                  onChange={(e) => setEndDate(e.target.value)}
-                  required
-                />
-              </Form.Group>
-            </Col>
-          </Row>
+            <Row className="mb-3">
+              <Col md={12}>
+                <Button variant="primary" type="submit" className="w-100 rounded-pill">
+                  Get Weather Data
+                </Button>
+              </Col>
+            </Row>
+          </Form>
 
-          <Row className="mb-3">
-            <Col md={12}>
-              <Button variant="primary" type="submit" block>
-                Get Weather Data
-              </Button>
-            </Col>
-          </Row>
-        </Form>
+          {/* Error message */}
+          {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
 
-        {/* Error message */}
-        {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
+          {/* Loader */}
+          {loading && (
+            <div className="mt-3 text-center">
+              <Spinner animation="border" variant="primary" /> 
+              <p className="mt-2">Fetching data...</p>
+            </div>
+          )}
 
-        {/* Loader */}
-        {loading && (
-          <div className="mt-3">
-            <Spinner animation="border" variant="primary" /> Loading...
-          </div>
-        )}
-
-        {/* Tabs for Weather Data */}
-        {!loading && weatherData && (
-          <Tabs defaultActiveKey="temperature" id="weather-data-tabs" className="mt-4">
-            <Tab eventKey="temperature" title="Temperature">
-              <h3>Temperature Data (Chart)</h3>
-              <Line data={chartDataTemperature} />
-            </Tab>
-            <Tab eventKey="precipitation" title="Precipitation">
-              <h3>Precipitation Data (Chart)</h3>
-              <Line data={chartDataPrecipitation} />
-            </Tab>
-            <Tab eventKey="table" title="Weather Table">
-              <h3>Weather Data (Table)</h3>
-              <Table striped bordered hover>
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>High Temperature (°C)</th>
-                    <th>Low Temperature (°C)</th>
-                    <th>Precipitation (mm)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {weatherData.map((item, index) => (
-                    <tr key={index}>
-                      <td>{item.date}</td>
-                      <td>{item.temperature_high}</td>
-                      <td>{item.temperature_low}</td>
-                      <td>{item.precipitation}</td>
+          {/* Tabs for Weather Data */}
+          {!loading && weatherData && (
+            <Tabs defaultActiveKey="temperature" id="weather-data-tabs" className="mt-4">
+              <Tab eventKey="temperature" title="Temperature">
+                <h3 className="mt-4 mb-4 text-primary">Temperature Data (Chart)</h3>
+                <Line data={chartDataTemperature} />
+              </Tab>
+              <Tab eventKey="precipitation" title="Precipitation">
+                <h3 className="mt-4 mb-4 text-primary">Precipitation Data (Chart)</h3>
+                <Line data={chartDataPrecipitation} />
+              </Tab>
+              <Tab eventKey="table" title="Weather Table">
+                <h3 className="mt-4 mb-4 text-primary">Weather Data (Table)</h3>
+                <Table striped bordered hover responsive>
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>High Temperature (°C)</th>
+                      <th>Low Temperature (°C)</th>
+                      <th>Precipitation (mm)</th>
                     </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </Tab>
-          </Tabs>
-        )}
+                  </thead>
+                  <tbody>
+                    {weatherData.map((item, index) => (
+                      <tr key={index}>
+                        <td>{item.date}</td>
+                        <td>{item.temperature_high}</td>
+                        <td>{item.temperature_low}</td>
+                        <td>{item.precipitation}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </Tab>
+            </Tabs>
+          )}
+        </Card.Body>
       </Card>
     </Container>
   );
