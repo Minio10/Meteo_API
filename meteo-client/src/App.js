@@ -74,7 +74,6 @@ const App = () => {
         <h2 className="mb-4">Weather Data</h2>
 
         <Form onSubmit={handleSubmit}>
-          {/* First row for Location */}
           <Row className="mb-3">
             <Col md={12}>
               <Form.Group controlId="location">
@@ -90,7 +89,6 @@ const App = () => {
             </Col>
           </Row>
 
-          {/* Second row for Start Date and End Date */}
           <Row className="mb-3">
             <Col md={6}>
               <Form.Group controlId="start_date">
@@ -116,7 +114,6 @@ const App = () => {
             </Col>
           </Row>
 
-          {/* Submit button in a separate row */}
           <Row className="mb-3">
             <Col md={12}>
               <Button variant="primary" type="submit" block>
