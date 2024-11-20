@@ -3,13 +3,9 @@
 Meteo API
 
 ## Overview
-This is a full-stack application with a **Ruby on Rails** backend (API) and a **React** frontend.
-For this project I used Ruby on Rails in API mode to serve as the API for the React application.
-The Rails API makes API calls to [Open Meteo ](https://open-meteo.com/), when the searched information
-is not present on the database of the backend application.
-The main goal behind the project is to access weather information details
-about a given location and a given date range.
-Below are the steps to set up and run the project locally.
+This is a full-stack application that uses a Ruby on Rails backend (API) and a React frontend. The Rails API serves as the backend for the React app, providing weather information based on a given location and date range.
+
+When weather data for a requested location and date range is not found in the database, the Rails API makes an external API call to Open Meteo to retrieve the missing data. The goal of the project is to allow users to access detailed weather information for a specific location and date range.
 
 ---
 
