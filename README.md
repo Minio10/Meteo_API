@@ -35,7 +35,7 @@ Below are the steps to set up and run the project locally.
 1. **Clone the Repository:**
    ```bash
    git clone git@github.com:Minio10/Meteo_API.git
-   cd meteo_api
+   cd Meteo_API
    ```
 
 2. **Install Dependencies:**
@@ -49,7 +49,7 @@ Below are the steps to set up and run the project locally.
 
 1. **Navigate to the Frontend Directory:**
    ```bash
-   cd ../meteo-client
+   cd meteo-client
    ```
 
 2. **Install Dependencies:**
