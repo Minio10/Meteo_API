@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, Container, Alert, Table, Row, Col, Card, Spinner } from 'react-bootstrap';
+import { Form, Button, Container, Alert, Table, Row, Col, Card, Spinner, Tabs, Tab } from 'react-bootstrap';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 
@@ -46,7 +46,7 @@ const App = () => {
   };
 
   // Prepare data for chart and table
-  const chartData = weatherData && {
+  const chartDataTemperature = weatherData && {
     labels: weatherData.map(item => item.date), // Dates as x-axis
     datasets: [
       {
@@ -62,7 +62,13 @@ const App = () => {
         borderColor: 'rgba(54, 162, 235, 1)',
         backgroundColor: 'rgba(54, 162, 235, 0.2)',
         fill: true,
-      },
+      }
+    ]
+  };
+
+  const chartDataPrecipitation = weatherData && {
+    labels: weatherData.map(item => item.date), // Dates as x-axis
+    datasets: [
       {
         label: 'Precipitation (mm)',
         data: weatherData.map(item => item.precipitation), // Precipitation
@@ -138,39 +144,41 @@ const App = () => {
           </div>
         )}
 
-        {/* Chart */}
-        {weatherData && !loading && (
-          <div className="mt-4">
-            <h3>Weather Data (Chart)</h3>
-            <Line data={chartData} />
-          </div>
-        )}
-
-        {/* Table */}
-        {weatherData && !loading && (
-          <div className="mt-4">
-            <h3>Weather Data (Table)</h3>
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>High Temperature (°C)</th>
-                  <th>Low Temperature (°C)</th>
-                  <th>Precipitation (mm)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {weatherData.map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.date}</td>
-                    <td>{item.temperature_high}</td>
-                    <td>{item.temperature_low}</td>
-                    <td>{item.precipitation}</td>
+        {/* Tabs for Weather Data */}
+        {!loading && weatherData && (
+          <Tabs defaultActiveKey="temperature" id="weather-data-tabs" className="mt-4">
+            <Tab eventKey="temperature" title="Temperature">
+              <h3>Temperature Data (Chart)</h3>
+              <Line data={chartDataTemperature} />
+            </Tab>
+            <Tab eventKey="precipitation" title="Precipitation">
+              <h3>Precipitation Data (Chart)</h3>
+              <Line data={chartDataPrecipitation} />
+            </Tab>
+            <Tab eventKey="table" title="Weather Table">
+              <h3>Weather Data (Table)</h3>
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>High Temperature (°C)</th>
+                    <th>Low Temperature (°C)</th>
+                    <th>Precipitation (mm)</th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
-          </div>
+                </thead>
+                <tbody>
+                  {weatherData.map((item, index) => (
+                    <tr key={index}>
+                      <td>{item.date}</td>
+                      <td>{item.temperature_high}</td>
+                      <td>{item.temperature_low}</td>
+                      <td>{item.precipitation}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </Tab>
+          </Tabs>
         )}
       </Card>
     </Container>
