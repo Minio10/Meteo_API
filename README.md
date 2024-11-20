@@ -3,7 +3,11 @@
 Meteo API
 
 ## Overview
-This is a full-stack application with a **Ruby on Rails** backend (API) and a **React** frontend. Below are the steps to set up and run the project locally.
+This is a full-stack application with a **Ruby on Rails** backend (API) and a **React** frontend.
+For this project I used Ruby on Rails in API mode to serve as the API for the React application.
+The main goal behind the project is to access weather information details
+about a given location and a given date range.
+Below are the steps to set up and run the project locally.
 
 ---
 
