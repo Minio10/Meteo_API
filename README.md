@@ -7,6 +7,12 @@ This is a full-stack application that uses a Ruby on Rails backend (API) and a R
 
 When weather data for a requested location and date range is not found in the database, the Rails API makes an external API call to Open Meteo to retrieve the missing data. The goal of the project is to allow users to access detailed weather information for a specific location and date range.
 
+In the React frontend, the weather information is displayed in two formats:
+- A **line graph** that visualizes the **min and max temperatures** along with **precipitation** for the given date range.
+- A **table** that presents the same data in a structured format.
+
+Below are the steps to set up and run the project locally.
+
 ---
 
 ## Requirements
@@ -50,7 +56,7 @@ When weather data for a requested location and date range is not found in the da
 
 1. **Navigate to the Frontend Directory:**
    ```bash
-   cd ../frontend
+   cd ../meteo-client
    ```
 
 2. **Install Dependencies:**
