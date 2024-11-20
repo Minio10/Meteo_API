@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, Container, Alert, Table, Row, Col, Card } from 'react-bootstrap';
+import { Form, Button, Container, Alert, Table, Row, Col, Card, Spinner } from 'react-bootstrap';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 
@@ -14,12 +14,15 @@ const App = () => {
   const [endDate, setEndDate] = useState('');
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const fetchWeatherData = async () => {
     if (!location || !startDate || !endDate) {
       setError("All fields are required.");
       return;
     }
+
+    setLoading(true);
 
     try {
       const response = await fetch(`${API_URL}?location=${location}&start_date=${startDate}&end_date=${endDate}`);
@@ -32,6 +35,8 @@ const App = () => {
       }
     } catch (err) {
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -126,8 +131,15 @@ const App = () => {
         {/* Error message */}
         {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
 
+        {/* Loader */}
+        {loading && (
+          <div className="mt-3">
+            <Spinner animation="border" variant="primary" /> Loading...
+          </div>
+        )}
+
         {/* Chart */}
-        {weatherData && (
+        {weatherData && !loading && (
           <div className="mt-4">
             <h3>Weather Data (Chart)</h3>
             <Line data={chartData} />
@@ -135,7 +147,7 @@ const App = () => {
         )}
 
         {/* Table */}
-        {weatherData && (
+        {weatherData && !loading && (
           <div className="mt-4">
             <h3>Weather Data (Table)</h3>
             <Table striped bordered hover>
