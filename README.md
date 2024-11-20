@@ -66,6 +66,8 @@ To start both the Rails backend and the React frontend concurrently, use **Forem
 gem install foreman
 foreman start
 ```
+   - The Rails server will run on http://localhost:3000
+   - The React app will run on http://localhost:3011
 ---
 ## Additional Notes
 
